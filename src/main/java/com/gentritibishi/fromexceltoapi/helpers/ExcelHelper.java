@@ -8,12 +8,9 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
-import static com.gentritibishi.fromexceltoapi.helpers.Constants.SHEET;
-import static com.gentritibishi.fromexceltoapi.helpers.Constants.TYPE;
+import static com.gentritibishi.fromexceltoapi.helpers.Constants.*;
 
 public class ExcelHelper {
     public static boolean hasExcelFormat(MultipartFile file) {
@@ -50,6 +47,7 @@ public class ExcelHelper {
                 {
 
                     Cell cell = currentRow.getCell(colNum, Row.MissingCellPolicy.CREATE_NULL_AS_BLANK);
+                    cell.setCellType(CellType.STRING);
                     if(cell == null || cell.getCellType() == CellType.BLANK)
                     {
                         //skip empty cell grow for one
@@ -58,39 +56,39 @@ public class ExcelHelper {
                         switch (colNum)
                         {
                             case 0:
-                                employee.setName(cell.getStringCellValue()+"");
+                                employee.setName(String.valueOf(cell.getStringCellValue()));
                                 break;
 
                             case 1:
-                                employee.setManager(cell.getStringCellValue()+"");
+                                employee.setManager(String.valueOf(cell.getStringCellValue()));
                                 break;
 
                             case 2:
-                                employee.setUsername(cell.getStringCellValue()+"");
+                                employee.setUsername(String.valueOf(cell.getStringCellValue()));
                                 break;
 
                             case 3:
-                                employee.setEmail(cell.getStringCellValue()+"");
+                                employee.setEmail(String.valueOf(cell.getStringCellValue()));
                                 break;
 
                             case 4:
-                                employee.setDepartment(cell.getStringCellValue()+"");
+                                employee.setDepartment(String.valueOf(cell.getStringCellValue()));
                                 break;
 
                             case 5:
-                                employee.setPhone_number(cell.getStringCellValue()+"");
+                                employee.setPhone_number(String.valueOf(cell.getStringCellValue()));
                                 break;
 
                             case 6:
-                                employee.setAddress(cell.getStringCellValue()+"");
+                                employee.setAddress(String.valueOf(cell.getStringCellValue()));
                                 break;
 
                             case 7:
-                                employee.setStart_date(cell.getNumericCellValue()+"");
+                                employee.setStart_date(DateHelper.formatDate(cell.getStringCellValue()));
                                 break;
 
                             case 8:
-                                employee.setEnd_date(cell.getNumericCellValue()+"");
+                                employee.setEnd_date(DateHelper.formatDate(cell.getStringCellValue()));
                                 break;
 
                             default:
@@ -100,6 +98,7 @@ public class ExcelHelper {
 
                 }
 
+                checkAndSetStatusToModel(employee);
                 employees.add(employee);
             }
 
@@ -108,6 +107,22 @@ public class ExcelHelper {
             return employees;
         } catch (IOException e) {
             throw new RuntimeException("fail to parse Excel file: " + e.getMessage());
+        }
+    }
+
+    public static void checkAndSetStatusToModel(Employee employee) {
+
+        String end_date = employee.getEnd_date();
+
+        int year = Integer.parseInt(end_date.substring(0,4));
+        int month = Integer.parseInt(end_date.substring(5,7));
+        int day = Integer.parseInt(end_date.substring(8));
+
+        if(DateHelper.isAccountActive(year, month, day))
+        {
+            employee.setStatus(ACTIVE);
+        }else {
+            employee.setStatus(INACTIVE);
         }
     }
 

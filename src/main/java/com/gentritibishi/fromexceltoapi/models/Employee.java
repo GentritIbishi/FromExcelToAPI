@@ -37,10 +37,13 @@ public class Employee {
     @Column(name = "end_date")
     private String end_date;
 
+    @Column(name = "status")
+    private String status;
+
     public Employee() {
     }
 
-    public Employee(String username, String name, String manager, String email, String department, String phone_number, String address, String start_date, String end_date) {
+    public Employee(String username, String name, String manager, String email, String department, String phone_number, String address, String start_date, String end_date, String status) {
         this.username = username;
         this.name = name;
         this.manager = manager;
@@ -50,6 +53,7 @@ public class Employee {
         this.address = address;
         this.start_date = start_date;
         this.end_date = end_date;
+        this.status = status;
     }
 
     public String getUsername() {
@@ -122,5 +126,13 @@ public class Employee {
 
     public void setEnd_date(String end_date) {
         this.end_date = end_date;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }
