@@ -6,6 +6,7 @@ import com.gentritibishi.fromexceltoapi.models.Employee;
 import com.gentritibishi.fromexceltoapi.repository.DepartmentRepository;
 import com.gentritibishi.fromexceltoapi.repository.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -44,4 +45,17 @@ public class ExcelService {
     public List<Department> getAllDepartment() {
         return departmentRepository.findAll();
     }
+
+    public List<Employee> getAllEmployeeByFieldWithSortASC(String field) {
+        return employeeRepository.findAll(Sort.by(Sort.Direction.ASC, field));
+    }
+
+    public List<Employee> getAllEmployeeByFieldWithSortDESC(String field) {
+        return employeeRepository.findAll(Sort.by(Sort.Direction.DESC, field));
+    }
+
+    public List<Employee> getAllEmployeeByDepartment(String department) {
+        return employeeRepository.findEmployeeByDepartment(department);
+    }
+
 }

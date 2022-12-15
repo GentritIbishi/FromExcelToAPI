@@ -12,4 +12,7 @@ public interface EmployeeRepository extends JpaRepository<Employee, String> {
 
     @Query("SELECT e FROM Employee e WHERE e.status = 'inactive'")
     public List<Employee> findEmployeeByStatusInActive();
+
+    @Query("SELECT e FROM Employee e WHERE e.department = ?1")
+    public List<Employee> findEmployeeByDepartment(String department);
 }

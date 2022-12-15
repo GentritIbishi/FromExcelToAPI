@@ -1,6 +1,7 @@
 package com.gentritibishi.fromexceltoapi.controller;
 
 import com.gentritibishi.fromexceltoapi.helpers.ExcelHelper;
+import com.gentritibishi.fromexceltoapi.helpers.StringHelper;
 import com.gentritibishi.fromexceltoapi.message.ResponseMessage;
 import com.gentritibishi.fromexceltoapi.models.Department;
 import com.gentritibishi.fromexceltoapi.models.Employee;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @CrossOrigin("http://localhost:8080")
@@ -32,13 +34,28 @@ public class ExcelController {
                 message = "Uploaded the file successfully: " + file.getOriginalFilename();
                 return ResponseEntity.status(HttpStatus.OK).body(new ResponseMessage(message));
             } catch (Exception e) {
-                message = "Could not upload the file: " + file.getOriginalFilename() + "!"+ " Error: "+ e.getMessage();
+                message = "Could not upload the file: " + file.getOriginalFilename() + "!" + " Error: " + e.getMessage();
                 return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body(new ResponseMessage(message));
             }
         }
 
         message = "Please upload an excel file!";
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ResponseMessage(message));
+    }
+
+    @GetMapping("/departments")
+    public ResponseEntity<List<Department>> getAllDepartments() {
+        try {
+            List<Department> departments = fileService.getAllDepartment();
+
+            if (departments.isEmpty()) {
+                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            }
+
+            return new ResponseEntity<>(departments, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @GetMapping("/employees")
@@ -86,20 +103,64 @@ public class ExcelController {
         }
     }
 
-    @GetMapping("/departments")
-    public ResponseEntity<List<Department>> getAllDepartments() {
+    @GetMapping("/employees/{field}/asc")
+    public ResponseEntity<List<Employee>> getAllEmployeeByFieldWithSortASC(@PathVariable String field) {
         try {
-            List<Department> departments = fileService.getAllDepartment();
+            List<Employee> employees = fileService.getAllEmployeeByFieldWithSortASC(field);
 
-            if (departments.isEmpty()) {
+            if (employees.isEmpty()) {
                 return new ResponseEntity<>(HttpStatus.NO_CONTENT);
             }
 
-            return new ResponseEntity<>(departments, HttpStatus.OK);
+            return new ResponseEntity<>(employees, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
+    @GetMapping("/employees/{field}/desc")
+    public ResponseEntity<List<Employee>> getAllEmployeeByFieldWithSortDESC(@PathVariable String field) {
+        try {
+            List<Employee> employees = fileService.getAllEmployeeByFieldWithSortDESC(field);
 
+            if (employees.isEmpty()) {
+                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            }
+
+            return new ResponseEntity<>(employees, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @GetMapping("/employees/{department}")
+    public ResponseEntity<List<String>> getAllEmployeeByDepartment(@PathVariable String department) {
+        try {
+            List<Employee> employees = fileService.getAllEmployeeByDepartment(department);
+
+            List<String> lastNames = new ArrayList<>();
+
+            for(int i = 0; i<employees.size();i++)
+            {
+                //for each employee get last name and list
+                String fullName = employees.get(i).getName();
+                String[] fullNameArr = fullName.split(" ");
+                if(fullNameArr.length > 2)
+                {
+                    lastNames.add(fullNameArr[2]);
+                }else if(fullNameArr.length == 2)
+                {
+                    lastNames.add(fullNameArr[1]);
+                }
+            }
+
+            if (employees.isEmpty()) {
+                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            }
+
+            return new ResponseEntity<>(lastNames, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 }

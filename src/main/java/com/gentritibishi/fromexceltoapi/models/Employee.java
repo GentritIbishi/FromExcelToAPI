@@ -1,15 +1,15 @@
 package com.gentritibishi.fromexceltoapi.models;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name="employee")
 public class Employee {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
     @Column(name = "username")
     private String username;
 
@@ -54,6 +54,14 @@ public class Employee {
         this.start_date = start_date;
         this.end_date = end_date;
         this.status = status;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getUsername() {
