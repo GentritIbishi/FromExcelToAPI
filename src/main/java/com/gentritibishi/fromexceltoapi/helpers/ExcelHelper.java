@@ -48,10 +48,7 @@ public class ExcelHelper {
 
                     Cell cell = currentRow.getCell(colNum, Row.MissingCellPolicy.CREATE_NULL_AS_BLANK);
                     cell.setCellType(CellType.STRING);
-                    if(cell == null || cell.getCellType() == CellType.BLANK)
-                    {
-                        //skip empty cell grow for one
-                    }else
+                    if(!StringHelper.empty(String.valueOf(cell)))
                     {
                         switch (colNum)
                         {
@@ -111,7 +108,6 @@ public class ExcelHelper {
     }
 
     public static void checkAndSetStatusToModel(Employee employee) {
-
         String end_date = employee.getEnd_date();
 
         int year = Integer.parseInt(end_date.substring(0,4));
@@ -151,10 +147,8 @@ public class ExcelHelper {
                 {
 
                     Cell cell = currentRow.getCell(colNum, Row.MissingCellPolicy.CREATE_NULL_AS_BLANK);
-                    if(cell == null || cell.getCellType() == CellType.BLANK)
-                    {
-                        //skip empty cell grow for one
-                    }else
+                    cell.setCellType(CellType.STRING);
+                    if(!StringHelper.empty(String.valueOf(cell)))
                     {
                         switch (colNum)
                         {
