@@ -56,6 +56,36 @@ public class ExcelController {
         }
     }
 
+    @GetMapping("/employees/active")
+    public ResponseEntity<List<Employee>> getAllActiveEmployee() {
+        try {
+            List<Employee> employees = fileService.getAllActiveEmployee();
+
+            if (employees.isEmpty()) {
+                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            }
+
+            return new ResponseEntity<>(employees, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @GetMapping("/employees/inactive")
+    public ResponseEntity<List<Employee>> getAllInActiveEmployee() {
+        try {
+            List<Employee> employees = fileService.getAllInActiveEmployee();
+
+            if (employees.isEmpty()) {
+                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            }
+
+            return new ResponseEntity<>(employees, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
     @GetMapping("/departments")
     public ResponseEntity<List<Department>> getAllDepartments() {
         try {

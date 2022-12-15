@@ -32,6 +32,15 @@ public class ExcelService {
     public List<Employee> getAllEmployees() {
         return employeeRepository.findAll();
     }
+
+    public List<Employee> getAllActiveEmployee() {
+        return employeeRepository.findEmployeeByStatusActive();
+    }
+
+    public List<Employee> getAllInActiveEmployee() {
+        return employeeRepository.findEmployeeByStatusInActive();
+    }
+
     public List<Department> getAllDepartment() {
         return departmentRepository.findAll();
     }
