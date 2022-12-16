@@ -10,7 +10,7 @@ Spring Boot Application - Import data from Excel to MySQL Database
 
 ### Screenshots Endpoints
 
-> Methods Urls Actions
+> METHOD | URL | ACTION
  
 > POST	/api/excel/upload	upload an Excel File and insert data into MySQL Database
 
