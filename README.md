@@ -8,9 +8,7 @@ Spring Boot Application - Import data from Excel to MySQL Database
 * [x] Upload the same ".xlsx" file every day or as many times as you want, the application detects similarities and does not enter them as duplicates in the database.
 * [x] The application also supports every modification and change of the file every time it is uploaded and update correctly without duplicate and just like we want.
 
-### Screenshots Endpoints
-
-> METHOD | URL | ACTION
+### Screenshots Endpoints - METHOD URL ACTION
  
 > POST	/api/excel/upload	upload an Excel File and insert data into MySQL Database
 
