@@ -12,7 +12,7 @@ Spring Boot Application - Import data from Excel to MySQL Database
 
 > Methods Urls Actions
  
-* POST	/api/excel/upload	upload an Excel File and insert data into MySQL Database
+> POST	/api/excel/upload	upload an Excel File and insert data into MySQL Database
 ![First Time - Uploading file](screenshots/uploadEndpoint/first_upload_endpoint.png) |
 ![First Time - Department Table](screenshots/uploadEndpoint/first_department_table.png) |
 ![First Time - Employee Table Part 1](screenshots/uploadEndpoint/first_employee_table_1.png) |
@@ -22,52 +22,52 @@ Spring Boot Application - Import data from Excel to MySQL Database
 ![Second Time - Employee Table Part 1](screenshots/uploadEndpoint/second_employee_table_1.png) |
 ![Second Time - Employee Table Part 2](screenshots/uploadEndpoint/second_employee_table_2.png) |
 
-* GET	/api/excel/departments	get List of departments in db table
+> GET	/api/excel/departments	get List of departments in db table
 ![Response as JSON List of departments](screenshots/departmentsEndpoint/endpoint.png) |
 
-* GET	/api/excel/employees	get List of employees in db table
+> GET	/api/excel/employees	get List of employees in db table
 ![Response as JSON List of employees](screenshots/employeeEndpoint/endpoint.png) |
 
-* GET	/api/excel/employees/active	get List of employees active in db table
+> GET	/api/excel/employees/active	get List of employees active in db table
 ![Response as JSON List of active employees](screenshots/employeeActiveEndpoint/endpoint.png) |
 
-* GET	/api/excel/employees/inactive	get List of employees inactive in db table
+> GET	/api/excel/employees/inactive	get List of employees inactive in db table
 ![Response as JSON List of inactive employees](screenshots/employeeInactiveEndpoint/endpoint.png) |
 
-* GET	/api/excel/employees/{field}/asc get List of employees in ascending by field
+> GET	/api/excel/employees/{field}/asc get List of employees in ascending by field
 ![Response as JSON List of employees in Ascending](screenshots/employeeSortByFieldAsc/endpoint.png) |
 
-* GET	/api/excel/employees/{field}/desc get List of employees in descending by field
+> GET	/api/excel/employees/{field}/desc get List of employees in descending by field
 ![Response as JSON List of employees in Descending](screenshots/employeeSortByFieldDesc/endpoint.png) |
 
-* GET	/employees/{department} get List of last name of employees by department we want for ex: IT department.
+> GET	/employees/{department} get List of last name of employees by department we want for ex: IT department.
 ![Response as JSON List of last name of employees by department: IT](screenshots/employeeSortByDepartment/endpoint%20sort%20it.png) |
 ![Response as JSON List of last name of employees by department: Sales](screenshots/employeeSortByDepartment/endpoint%20sort%20sales.png) |
 
 ### Unit test Screenshots
 
-* uploadFile()
+> Unit test - Uploading Dile - uploadFile()
 ![Unit test - Uploading file](screenshots/unitTests/unit_test_uploadFile.png) |
 
-* getAllDepartments()
+> Unit test - Get all Departments - getAllDepartments()
 ![Unit test - Get all departments](screenshots/unitTests/unit_test_getAllDepartments.png) |
 
-* getAllEmployee()
+> Unit test - Get all Employee - getAllEmployee()
 ![Unit test - Get all employee](screenshots/unitTests/unit_test_getAllEmployee.png) |
 
-* getAllActiveEmployee()
+> Unit test - Get all Active Employee - getAllActiveEmployee()
 ![Unit test - Get all active employee](screenshots/unitTests/unit_test_getAllActiveEmployee.png) |
 
-* getAllInActiveEmployee()
+> Unit test - Get all InActive Employee - getAllInActiveEmployee()
 ![Unit test - Get all inactive employee](screenshots/unitTests/unit_test_getAllInActiveEmployee.png) |
 
-* getAllEmployeeByFieldWithSortASC()
+> Unit test - Get all employee by field with sort ASC - getAllEmployeeByFieldWithSortASC()
 ![Unit test - Get all employee by field with sort ASC](screenshots/unitTests/unit_test_getAllEmployeeByFieldWithSortASC.png) |
 
-* getAllEmployeeByFieldWithSortDESC()
+> Unit test - Get all employee by field with sort DESC - getAllEmployeeByFieldWithSortDESC()
 ![Unit test - Get all employee by field with sort DESC](screenshots/unitTests/unit_test_getAllEmployeeByFieldWithSortDESC.png) |
 
-* getAllEmployeeByDepartment()
+> Unit test - Get all employee by department - getAllEmployeeByDepartment()
 ![Unit test - Get all employee by department](screenshots/unitTests/unit_test_getAllEmployeeByDepartment.png) |
 
 ### Requirements
