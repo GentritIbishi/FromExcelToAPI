@@ -9,8 +9,10 @@ Spring Boot Application - Import data from Excel to MySQL Database
 * [x] The application also supports every modification and change of the file every time it is uploaded and update correctly without duplicate and just like we want.
 
 ### Screenshots Endpoints - METHOD URL ACTION
- 
-> POST	/api/excel/upload	upload an Excel File and insert data into MySQL Database
+
+```
+POST /api/excel/upload upload an Excel File and Insert Data into MySQL Database
+```
 
 #### First Time Uploading
 
