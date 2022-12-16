@@ -3,10 +3,10 @@
 
 Spring Boot Application - Import data from Excel to MySQL Database
 
-## Features(Bonus Task done)
-* [x] The Excel .xlsx file loads and inserts data in MySQL database every day, time, so the application has the following limitations:
-** [x] Upload the same ".xlsx" file every day or as many times as you want, the application detects similarities and does not enter them as duplicates in the database.
-** [x] The application also supports every modification and change of the file every time it is uploaded and update correctly without duplicate and just like we want.
+## Features
+### [x] The Excel .xlsx file loads and inserts data in MySQL database every day, time, so the application has the following limitations:
+### [x] Upload the same ".xlsx" file every day or as many times as you want, the application detects similarities and does not enter them as duplicates in the database.
+### [x] The application also supports every modification and change of the file every time it is uploaded and update correctly without duplicate and just like we want.
 
 ### Screenshots Endpoints
 
