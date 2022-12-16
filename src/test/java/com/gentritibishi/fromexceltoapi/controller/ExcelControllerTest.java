@@ -120,7 +120,7 @@ public class ExcelControllerTest {
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$", hasSize(1)))
-                .andExpect(jsonPath("$[0].department_name", is(department.getDepartment_name())));
+                .andExpect(jsonPath("$[0].department_name", is(department.getDepartmentName())));
     }
 
     @Test

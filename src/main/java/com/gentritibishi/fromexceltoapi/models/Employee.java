@@ -26,16 +26,16 @@ public class Employee {
     private String department;
 
     @Column(name = "phone_number")
-    private String phone_number;
+    private String phoneNumber;
 
     @Column(name = "address")
     private String address;
 
     @Column(name = "start_date")
-    private String start_date;
+    private String startDate;
 
     @Column(name = "end_date")
-    private String end_date;
+    private String endDate;
 
     @Column(name = "status")
     private String status;
@@ -43,16 +43,16 @@ public class Employee {
     public Employee() {
     }
 
-    public Employee(String username, String name, String manager, String email, String department, String phone_number, String address, String start_date, String end_date, String status) {
+    public Employee(String username, String name, String manager, String email, String department, String phoneNumber, String address, String startDate, String endDate, String status) {
         this.username = username;
         this.name = name;
         this.manager = manager;
         this.email = email;
         this.department = department;
-        this.phone_number = phone_number;
+        this.phoneNumber = phoneNumber;
         this.address = address;
-        this.start_date = start_date;
-        this.end_date = end_date;
+        this.startDate = startDate;
+        this.endDate = endDate;
         this.status = status;
     }
 
@@ -104,12 +104,12 @@ public class Employee {
         this.department = department;
     }
 
-    public String getPhone_number() {
-        return phone_number;
+    public String getPhoneNumber() {
+        return phoneNumber;
     }
 
-    public void setPhone_number(String phone_number) {
-        this.phone_number = phone_number;
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 
     public String getAddress() {
@@ -120,20 +120,20 @@ public class Employee {
         this.address = address;
     }
 
-    public String getStart_date() {
-        return start_date;
+    public String getStartDate() {
+        return startDate;
     }
 
-    public void setStart_date(String start_date) {
-        this.start_date = start_date;
+    public void setStartDate(String startDate) {
+        this.startDate = startDate;
     }
 
-    public String getEnd_date() {
-        return end_date;
+    public String getEndDate() {
+        return endDate;
     }
 
-    public void setEnd_date(String end_date) {
-        this.end_date = end_date;
+    public void setEndDate(String endDate) {
+        this.endDate = endDate;
     }
 
     public String getStatus() {

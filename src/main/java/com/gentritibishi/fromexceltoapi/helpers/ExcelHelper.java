@@ -73,7 +73,7 @@ public class ExcelHelper {
                                 break;
 
                             case 5:
-                                employee.setPhone_number(String.valueOf(cell.getStringCellValue()));
+                                employee.setPhoneNumber(String.valueOf(cell.getStringCellValue()));
                                 break;
 
                             case 6:
@@ -81,11 +81,11 @@ public class ExcelHelper {
                                 break;
 
                             case 7:
-                                employee.setStart_date(DateHelper.formatDate(cell.getStringCellValue()));
+                                employee.setStartDate(DateHelper.formatDate(cell.getStringCellValue()));
                                 break;
 
                             case 8:
-                                employee.setEnd_date(DateHelper.formatDate(cell.getStringCellValue()));
+                                employee.setEndDate(DateHelper.formatDate(cell.getStringCellValue()));
                                 break;
 
                             default:
@@ -108,7 +108,7 @@ public class ExcelHelper {
     }
 
     public static void checkAndSetStatusToModel(Employee employee) {
-        String end_date = employee.getEnd_date();
+        String end_date = employee.getEndDate();
 
         int year = Integer.parseInt(end_date.substring(0,4));
         int month = Integer.parseInt(end_date.substring(5,7));
@@ -153,13 +153,13 @@ public class ExcelHelper {
                         switch (colNum)
                         {
                             case 11:
-                                department.setDepartment_name(String.valueOf(cell.getStringCellValue()));
+                                department.setDepartmentName(String.valueOf(cell.getStringCellValue()));
                                 break;
                             case 12:
-                                department.setDepartment_leader(String.valueOf(cell.getStringCellValue()));
+                                department.setDepartmentLeader(String.valueOf(cell.getStringCellValue()));
                                 break;
                             case 13:
-                                department.setDepartment_phone(String.valueOf(cell.getStringCellValue()));
+                                department.setDepartmentPhone(String.valueOf(cell.getStringCellValue()));
                                 break;
 
                             default:
@@ -168,7 +168,7 @@ public class ExcelHelper {
                     }
 
                 }
-                if(!StringHelper.empty(department.getDepartment_name()))
+                if(!StringHelper.empty(department.getDepartmentName()))
                 {
                     departments.add(department);
                 }

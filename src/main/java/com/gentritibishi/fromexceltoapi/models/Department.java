@@ -10,44 +10,44 @@ import jakarta.persistence.Table;
 public class Department {
     @Id
     @Column(name = "department_name")
-    private String department_name;
+    private String departmentName;
 
     @Column(name = "department_leader")
-    private String department_leader;
+    private String departmentLeader;
 
     @Column(name = "department_phone")
-    private String department_phone;
+    private String departmentPhone;
 
     public Department() {
     }
 
-    public Department(String department_name, String department_leader, String department_phone) {
-        this.department_name = department_name;
-        this.department_leader = department_leader;
-        this.department_phone = department_phone;
+    public Department(String departmentName, String departmentLeader, String departmentPhone) {
+        this.departmentName = departmentName;
+        this.departmentLeader = departmentLeader;
+        this.departmentPhone = departmentPhone;
     }
 
-    public String getDepartment_name() {
-        return department_name;
+    public String getDepartmentName() {
+        return departmentName;
     }
 
-    public void setDepartment_name(String department_name) {
-        this.department_name = department_name;
+    public void setDepartmentName(String departmentName) {
+        this.departmentName = departmentName;
     }
 
-    public String getDepartment_leader() {
-        return department_leader;
+    public String getDepartmentLeader() {
+        return departmentLeader;
     }
 
-    public void setDepartment_leader(String department_leader) {
-        this.department_leader = department_leader;
+    public void setDepartmentLeader(String departmentLeader) {
+        this.departmentLeader = departmentLeader;
     }
 
-    public String getDepartment_phone() {
-        return department_phone;
+    public String getDepartmentPhone() {
+        return departmentPhone;
     }
 
-    public void setDepartment_phone(String department_phone) {
-        this.department_phone = department_phone;
+    public void setDepartmentPhone(String departmentPhone) {
+        this.departmentPhone = departmentPhone;
     }
 }
