@@ -4,8 +4,9 @@
 Spring Boot Application - Import data from Excel to MySQL Database
 
 ## Features
-•	Excel file upload extension support " .xlsx ".
-•	The application before uploading to the database checks:
+
+* [x] Excel file upload extension support " .xlsx ".
+* [x] The application before uploading to the database checks:
 1.	If it exists on the database
 It then checks for any modifications:
 •	Phone Number " column has been changed, then it updates that row with the last modification.
