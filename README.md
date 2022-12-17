@@ -12,7 +12,7 @@ Spring Boot Application - Import data from Excel to MySQL Database
 > If it exists on the database
 > > It then checks for any modifications:
 > > > Phone Number " column has been changed, then it updates that row with the last modification.
-> > >If it turns out that the row has not been modified then it does not insert it into the base dates as a duplicate.
+> > > If it turns out that the row has not been modified then it does not insert it into the base dates as a duplicate.
 
 
 > If it does not exist on the database
