@@ -7,11 +7,11 @@ Spring Boot Application - Import data from Excel to MySQL Database
 
 * [x] Excel file upload extension support " .xlsx ".
 * [x] The application before uploading to the database checks:
-1.	If it exists on the database
+> If it exists on the database
 It then checks for any modifications:
 •	Phone Number " column has been changed, then it updates that row with the last modification.
 •	If it turns out that the row has not been modified then it does not insert it into the base dates as a duplicate.
-2.	If it does not exist on the database
+> If it does not exist on the database
 Then enter it directly into the base date.
 
 
