@@ -12,7 +12,7 @@ Spring Boot Application - Import data from Excel to MySQL Database
 
 > POST /api/excel/upload upload an Excel File and Insert Data into MySQL Database
 
-#### First Time Uploading
+#### First Time Request Uploading
 
 ![First Time - Uploading file](screenshots/uploadEndpoint/first_upload_endpoint.png) 
 
@@ -25,7 +25,7 @@ Spring Boot Application - Import data from Excel to MySQL Database
 ![First Time - Employee Table Part 1](screenshots/uploadEndpoint/first_employee_table_1.png) 
 ![First Time - Employee Table Part 2](screenshots/uploadEndpoint/first_employee_table_2.png) 
 
-#### Second Time Uploading
+#### Second Time Request Uploading
 
 ![Second Time - Uploading file](screenshots/uploadEndpoint/second_upload_endpoint.png) 
 
