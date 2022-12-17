@@ -21,7 +21,7 @@ Spring Boot Application - Import data from Excel to MySQL Database
 
 ### Screenshots Endpoints - METHOD URL ACTION
 
-> POST /api/excel/upload upload an Excel File and Insert Data into MySQL Database
+> POST /api/excel/upload Upload an Excel File and Insert Data into MySQL Database
 
 #### First Time Request Uploading
 
@@ -49,31 +49,31 @@ Spring Boot Application - Import data from Excel to MySQL Database
 ![Second Time - Employee Table Part 1](screenshots/uploadEndpoint/second_employee_table_1.png) 
 ![Second Time - Employee Table Part 2](screenshots/uploadEndpoint/second_employee_table_2.png) 
 
-> GET	/api/excel/departments	get List of departments in db table
+> GET	/api/excel/department Get List of departments in db table
 
 ![Response as JSON List of departments](screenshots/departmentsEndpoint/endpoint.png) 
 
-> GET	/api/excel/employees	get List of employees in db table
+> GET	/api/excel/employees	Get List of employees in db table
 
 ![Response as JSON List of employees](screenshots/employeeEndpoint/endpoint.png) 
 
-> GET	/api/excel/employees/active	get List of employees active in db table
+> GET	/api/excel/employees/active	Get List of employees active in db table
 
 ![Response as JSON List of active employees](screenshots/employeeActiveEndpoint/endpoint.png) 
 
-> GET	/api/excel/employees/inactive	get List of employees inactive in db table
+> GET	/api/excel/employees/inactive Get List of employees inactive in db table
 
 ![Response as JSON List of inactive employees](screenshots/employeeInactiveEndpoint/endpoint.png) 
 
-> GET	/api/excel/employees/{field}/asc get List of employees in ascending by field
+> GET	/api/excel/employees/{field}/asc Get List of employees in ascending by field
 
 ![Response as JSON List of employees in Ascending](screenshots/employeeSortByFieldAsc/endpoint.png) 
 
-> GET	/api/excel/employees/{field}/desc get List of employees in descending by field
+> GET	/api/excel/employees/{field}/desc Get List of employees in descending by field
 
 ![Response as JSON List of employees in Descending](screenshots/employeeSortByFieldDesc/endpoint.png) 
 
-> GET	/employees/{department} get List of last name of employees by department we want for ex: IT department.
+> GET	/employees/{department} Get List of last name of employees by department we want for ex: IT department.
 
 ![Response as JSON List of last name of employees by department: IT](screenshots/employeeSortByDepartment/endpoint%20sort%20it.png)
 ![Response as JSON List of last name of employees by department: Sales](screenshots/employeeSortByDepartment/endpoint%20sort%20sales.png) 
