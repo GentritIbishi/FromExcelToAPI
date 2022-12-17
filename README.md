@@ -15,14 +15,26 @@ Spring Boot Application - Import data from Excel to MySQL Database
 #### First Time Uploading
 
 ![First Time - Uploading file](screenshots/uploadEndpoint/first_upload_endpoint.png) 
+
+> First Time Request - Department Table
+
 ![First Time - Department Table](screenshots/uploadEndpoint/first_department_table.png) 
+
+> First Time Request - Employee Table
+
 ![First Time - Employee Table Part 1](screenshots/uploadEndpoint/first_employee_table_1.png) 
 ![First Time - Employee Table Part 2](screenshots/uploadEndpoint/first_employee_table_2.png) 
 
 #### Second Time Uploading
 
 ![Second Time - Uploading file](screenshots/uploadEndpoint/second_upload_endpoint.png) 
+
+> Second Time Request - Department Table
+
 ![Second Time - Department Table](screenshots/uploadEndpoint/second_department_table.png) 
+
+> Second Time Request - Employee Table
+
 ![Second Time - Employee Table Part 1](screenshots/uploadEndpoint/second_employee_table_1.png) 
 ![Second Time - Employee Table Part 2](screenshots/uploadEndpoint/second_employee_table_2.png) 
 
