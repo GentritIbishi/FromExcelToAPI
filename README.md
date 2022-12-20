@@ -57,34 +57,37 @@ Spring Boot Application - Import data from Excel to MySQL Database
 
 ![Response as JSON List of employees](screenshots/employeeEndpoint/endpoint.png) 
 
-> GET	/api/excel/employees/active	Get List of employees active in db table
+> GET	/api/excel/employees?status=active	Get List of employees active in db table
 
-![Response as JSON List of active employees](screenshots/employeeActiveEndpoint/endpoint.png) 
+![Response as JSON List of active employees](screenshots/employeeEndpoint/employee_status_active.png) 
 
-> GET	/api/excel/employees/inactive Get List of employees inactive in db table
+> GET	/api/excel/employees?status=inactive Get List of employees inactive in db table
 
-![Response as JSON List of inactive employees](screenshots/employeeInactiveEndpoint/endpoint.png) 
+![Response as JSON List of inactive employees](screenshots/employeeEndpoint/employee_status_inactive.png) 
 
-> GET	/api/excel/employees/sort?field=id&direction=asc Get List of employees in ascending by field
+> GET	/api/excel/employees?field=id&direction=asc Get List of employees in ascending by field "id"
 
-![Response as JSON List of employees in Ascending](screenshots/endpointSort/sort_by_field_id_asc.png) 
+![Response as JSON List of employees in Ascending](screenshots/employeeEndpoint/employee_field_id_direction_asc.png) 
 
-> GET	/api/excel/employees/sort?field=id&direction=desc Get List of employees in descending by field
+> GET	/api/excel/employees?field=id&direction=desc Get List of employees in descending by field "id"
 
-![Response as JSON List of employees in Descending](screenshots/endpointSort/sort_by_field_id_desc.png) 
+![Response as JSON List of employees in Descending](screenshots/employeeEndpoint/employee_field_id_direction_desc.png) 
 
-> GET	/api/excel/employees/sort?field=name&direction=asc Get List of employees in ascending by field
+> GET	/api/excel/employees?field=name&direction=asc Get List of employees in ascending by field "name"
 
-![Response as JSON List of employees in Ascending](screenshots/endpointSort/sort_by_field_name_asc.png) 
+![Response as JSON List of employees in Ascending](screenshots/employeeEndpoint/employee_field_name_direction_asc.png) 
 
-> GET	/api/excel/employees/sort?field=name&direction=desc Get List of employees in descending by field
+> GET	/api/excel/employees?field=name&direction=desc Get List of employees in descending by field "name"
 
-![Response as JSON List of employees in Descending](screenshots/endpointSort/sort_by_field_name_desc.png) 
+![Response as JSON List of employees in Descending](screenshots/employeeEndpoint/employee_field_name_direction_desc.png) 
 
-> GET	/employees/{department} Get List of last name of employees by department we want for ex: IT department.
+> GET	/employees?department=IT Get List of last name of employees by department we want for ex: IT department.
 
-![Response as JSON List of last name of employees by department: IT](screenshots/employeeSortByDepartment/endpoint%20sort%20it.png)
-![Response as JSON List of last name of employees by department: Sales](screenshots/employeeSortByDepartment/endpoint%20sort%20sales.png) 
+![List lastNames of employees by department: IT in name field](screenshots/employeeEndpoint/employee_departmant_it.png)
+
+> GET	/employees?department=Sales Get List of last name of employees by department we want for ex: Sales department.
+
+![List lastNames of employees by department: Sales in name field](screenshots/employeeEndpoint/employee_departmant_sales.png) 
 
 ### Unit test Screenshots
 
