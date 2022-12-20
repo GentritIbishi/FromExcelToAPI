@@ -65,13 +65,21 @@ Spring Boot Application - Import data from Excel to MySQL Database
 
 ![Response as JSON List of inactive employees](screenshots/employeeInactiveEndpoint/endpoint.png) 
 
-> GET	/api/excel/employees/{field}/asc Get List of employees in ascending by field
+> GET	/api/excel/employees/sort?field=id&direction=asc Get List of employees in ascending by field
 
-![Response as JSON List of employees in Ascending](screenshots/employeeSortByFieldAsc/endpoint.png) 
+![Response as JSON List of employees in Ascending](screenshots/endpointSort/sort_by_field_id_asc.png) 
 
-> GET	/api/excel/employees/{field}/desc Get List of employees in descending by field
+> GET	/api/excel/employees/sort?field=id&direction=desc Get List of employees in descending by field
 
-![Response as JSON List of employees in Descending](screenshots/employeeSortByFieldDesc/endpoint.png) 
+![Response as JSON List of employees in Descending](screenshots/endpointSort/sort_by_field_id_desc.png) 
+
+> GET	/api/excel/employees/sort?field=name&direction=asc Get List of employees in ascending by field
+
+![Response as JSON List of employees in Ascending](screenshots/endpointSort/sort_by_field_name_asc.png) 
+
+> GET	/api/excel/employees/sort?field=name&direction=desc Get List of employees in descending by field
+
+![Response as JSON List of employees in Descending](screenshots/endpointSort/sort_by_field_name_desc.png) 
 
 > GET	/employees/{department} Get List of last name of employees by department we want for ex: IT department.
 
