@@ -26,12 +26,8 @@ public class ExcelService {
         return employeeRepository.findAll();
     }
 
-    public List<Employee> getAllActiveEmployee() {
-        return employeeRepository.findEmployeeByStatusActive();
-    }
-
-    public List<Employee> getAllInActiveEmployee() {
-        return employeeRepository.findEmployeeByStatusInActive();
+    public List<Employee> getAllEmployeeByStatus(String status) {
+        return employeeRepository.findByStatus(status);
     }
 
     public List<Department> getAllDepartment() {

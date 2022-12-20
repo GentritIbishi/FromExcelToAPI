@@ -40,8 +40,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static com.gentritibishi.fromexceltoapi.helpers.Constants.ASC;
-import static com.gentritibishi.fromexceltoapi.helpers.Constants.DESC;
+import static com.gentritibishi.fromexceltoapi.helpers.Constants.*;
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -123,8 +122,8 @@ public class ExcelControllerTest {
 
         List<Employee> allEmployees = Arrays.asList(employee);
 
-        given(service.getAllActiveEmployee()).willReturn(allEmployees);
-        mvc.perform(MockMvcRequestBuilders.get("/api/excel/employees/active"))
+        given(service.getAllEmployeeByStatus(ACTIVE)).willReturn(allEmployees);
+        mvc.perform(MockMvcRequestBuilders.get("/api/excel/employees?status="+ACTIVE))
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$", hasSize(1)))
@@ -134,12 +133,12 @@ public class ExcelControllerTest {
     @Test
     public void getAllInActiveEmployee() throws Exception {
         Employee employee = new Employee("gentrit.ibishi", "Gentrit Ibishi", "liz.erd", "gentritibishi@gmail.com"
-                , "IT", "(566) 576-7814", "L.Dardania", "2020-02-02", "2022-05-10", "inactive");
+                , "IT", "(566) 576-7814", "L.Dardania", "2020-02-02", "2022-05-10", "active");
 
         List<Employee> allEmployees = Arrays.asList(employee);
 
-        given(service.getAllInActiveEmployee()).willReturn(allEmployees);
-        mvc.perform(MockMvcRequestBuilders.get("/api/excel/employees/inactive"))
+        given(service.getAllEmployeeByStatus(INACTIVE)).willReturn(allEmployees);
+        mvc.perform(MockMvcRequestBuilders.get("/api/excel/employees?status="+INACTIVE))
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$", hasSize(1)))
@@ -156,7 +155,7 @@ public class ExcelControllerTest {
 
         given(service.getAllEmployeeByFieldAndDirection(field, Sort.Direction.ASC)).willReturn(allEmployees);
 
-        mvc.perform(MockMvcRequestBuilders.get("/api/excel/employees/sort?field="+field+"&direction="+ASC))
+        mvc.perform(MockMvcRequestBuilders.get("/api/excel/employees?field="+field+"&direction="+ASC))
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$", hasSize(2)))
@@ -175,7 +174,7 @@ public class ExcelControllerTest {
 
         given(service.getAllEmployeeByFieldAndDirection(field, Sort.Direction.DESC)).willReturn(allEmployees);
 
-        mvc.perform(MockMvcRequestBuilders.get("/api/excel/employees/sort?field="+field+"&direction="+DESC))
+        mvc.perform(MockMvcRequestBuilders.get("/api/excel/employees?field="+field+"&direction="+DESC))
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$", hasSize(2)))
@@ -194,7 +193,7 @@ public class ExcelControllerTest {
 
         given(service.getAllEmployeeByFieldAndDirection(field, Sort.Direction.ASC)).willReturn(allEmployees);
 
-        mvc.perform(MockMvcRequestBuilders.get("/api/excel/employees/sort?field="+field+"&direction="+ASC))
+        mvc.perform(MockMvcRequestBuilders.get("/api/excel/employees?field="+field+"&direction="+ASC))
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$", hasSize(2)))
@@ -213,7 +212,7 @@ public class ExcelControllerTest {
 
         given(service.getAllEmployeeByFieldAndDirection(field, Sort.Direction.DESC)).willReturn(allEmployees);
 
-        mvc.perform(MockMvcRequestBuilders.get("/api/excel/employees/sort?field="+field+"&direction="+DESC))
+        mvc.perform(MockMvcRequestBuilders.get("/api/excel/employees?field="+field+"&direction="+DESC))
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$", hasSize(2)))
@@ -222,7 +221,7 @@ public class ExcelControllerTest {
     }
 
     @Test
-    public void getAllEmployeeByDepartment() throws Exception {
+    public void getAllEmployeeByDepartmentIT() throws Exception {
         String department = "IT";
         Employee employee = new Employee("gentrit.ibishi", "Gentrit Ibishi", "liz.erd", "gentritibishi@gmail.com"
                 , "IT", "(566) 576-7814", "L.Dardania", "2020-02-02", "2022-05-10", "inactive");
@@ -233,12 +232,12 @@ public class ExcelControllerTest {
         String fullName = employee.getName();
         String[] fullNameArr = fullName.split(" ");
 
-        mvc.perform(MockMvcRequestBuilders.get("/api/excel/employees/"+department))
+        mvc.perform(MockMvcRequestBuilders.get("/api/excel/employees?department="+department))
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(result ->
                         {
-                            result.getResponse().getContentAsString().matches(fullNameArr[1]);
+                            result.getResponse().getContentAsString().equals(fullNameArr[1]);
                         }
                 );
     }

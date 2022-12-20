@@ -43,6 +43,10 @@ public class Employee {
     public Employee() {
     }
 
+    public Employee(String name) {
+        this.name = name;
+    }
+
     public Employee(String username, String name, String manager, String email, String department, String phoneNumber, String address, String startDate, String endDate, String status) {
         this.username = username;
         this.name = name;

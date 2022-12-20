@@ -63,96 +63,66 @@ public class ExcelController {
     }
 
     @GetMapping("/employees")
-    public ResponseEntity<List<Employee>> getAllEmployee() {
-        try {
-            List<Employee> employees = fileService.getAllEmployees();
-
-            if (employees.isEmpty()) {
-                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-            }
-
-            return new ResponseEntity<>(employees, HttpStatus.OK);
-        } catch (Exception e) {
-            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
-
-    @GetMapping("/employees/active")
-    public ResponseEntity<List<Employee>> getAllActiveEmployee() {
-        try {
-            List<Employee> employees = fileService.getAllActiveEmployee();
-
-            if (employees.isEmpty()) {
-                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-            }
-
-            return new ResponseEntity<>(employees, HttpStatus.OK);
-        } catch (Exception e) {
-            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
-
-    @GetMapping("/employees/inactive")
-    public ResponseEntity<List<Employee>> getAllInActiveEmployee() {
-        try {
-            List<Employee> employees = fileService.getAllInActiveEmployee();
-
-            if (employees.isEmpty()) {
-                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-            }
-
-            return new ResponseEntity<>(employees, HttpStatus.OK);
-        } catch (Exception e) {
-            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
-
-    @GetMapping("/employees/sort")
-    @ResponseBody
-    public ResponseEntity<List<Employee>> getAllEmployeeByFieldAndDirection(@RequestParam(value = "field") String field, @RequestParam(value = "direction") String direction) {
+    public ResponseEntity<List<Employee>> getAllEmployee(@RequestParam(value = "status", required = false) String status,
+                                                         @RequestParam(value = "field", required = false) String field,
+                                                         @RequestParam(value = "direction", required = false) String direction,
+                                                         @RequestParam(value = "department", required = false) String department) {
         try {
             List<Employee> employees = new ArrayList<>();
-            if (direction.equalsIgnoreCase(ASC)) {
-                employees = fileService.getAllEmployeeByFieldAndDirection(field, Sort.Direction.ASC);
-            } else if (direction.equalsIgnoreCase(DESC)) {
-                employees = fileService.getAllEmployeeByFieldAndDirection(field, Sort.Direction.DESC);
-            }
+            if (!StringHelper.empty(status)) {
+                employees = fileService.getAllEmployeeByStatus(status);
 
-            if (employees.isEmpty()) {
-                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-            } else {
+                if (employees.isEmpty()) {
+                    return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+                }
+
+                return new ResponseEntity<>(employees, HttpStatus.OK);
+            } else if (!StringHelper.empty(field) && !StringHelper.empty(direction)) {
+                if (direction.equalsIgnoreCase(ASC)) {
+                    employees = fileService.getAllEmployeeByFieldAndDirection(field, Sort.Direction.ASC);
+                } else if (direction.equalsIgnoreCase(DESC)) {
+                    employees = fileService.getAllEmployeeByFieldAndDirection(field, Sort.Direction.DESC);
+                }
+
+                if (employees.isEmpty()) {
+                    return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+                } else {
+                    return new ResponseEntity<>(employees, HttpStatus.OK);
+                }
+            } else if(!StringHelper.empty(department)){
+                employees = fileService.getAllEmployeeByDepartment(department);
+
+                List<Employee> lastNames = new ArrayList<>();
+                for (int i = 0; i < employees.size(); i++) {
+                    //for each employee get last name and list
+                    String fullName = employees.get(i).getName();
+                    String[] fullNameArr = fullName.split(" ");
+                    if (fullNameArr.length > 2) {
+                        Employee lEmployee = new Employee(fullNameArr[2]);
+                        lastNames.add(lEmployee);
+                    } else if (fullNameArr.length == 2) {
+                        Employee lEmployee = new Employee(fullNameArr[1]);
+                        lastNames.add(lEmployee);
+                    }
+                }
+
+                if (employees.isEmpty()) {
+                    return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+                }
+
+                return new ResponseEntity<>(lastNames, HttpStatus.OK);
+            }else{
+                employees = fileService.getAllEmployees();
+
+                if (employees.isEmpty()) {
+                    return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+                }
+
                 return new ResponseEntity<>(employees, HttpStatus.OK);
             }
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-
-    @GetMapping("/employees/{department}")
-    public ResponseEntity<List<String>> getAllEmployeeByDepartment(@PathVariable String department) {
-        try {
-            List<Employee> employees = fileService.getAllEmployeeByDepartment(department);
-
-            List<String> lastNames = new ArrayList<>();
-
-            for (int i = 0; i < employees.size(); i++) {
-                //for each employee get last name and list
-                String fullName = employees.get(i).getName();
-                String[] fullNameArr = fullName.split(" ");
-                if (fullNameArr.length > 2) {
-                    lastNames.add(fullNameArr[2]);
-                } else if (fullNameArr.length == 2) {
-                    lastNames.add(fullNameArr[1]);
-                }
-            }
-
-            if (employees.isEmpty()) {
-                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-            }
-
-            return new ResponseEntity<>(lastNames, HttpStatus.OK);
-        } catch (Exception e) {
-            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
+    
 }

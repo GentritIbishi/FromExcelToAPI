@@ -8,13 +8,8 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.List;
 
 public interface EmployeeRepository extends JpaRepository<Employee, String> {
-    @Query("select (count(e) > 0) from Employee e where e.id = ?1")
-    boolean ExistById(Long id);
-    @Query("SELECT e FROM Employee e WHERE e.status = 'active'")
-    List<Employee> findEmployeeByStatusActive();
-
-    @Query("SELECT e FROM Employee e WHERE e.status = 'inactive'")
-    List<Employee> findEmployeeByStatusInActive();
+    @Query("SELECT e FROM Employee e WHERE e.status = ?1")
+    List<Employee> findByStatus(String status);
 
     @Query("SELECT e FROM Employee e WHERE e.department = ?1")
     List<Employee> findEmployeeByDepartment(String department);
