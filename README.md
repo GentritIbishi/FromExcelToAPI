@@ -111,17 +111,25 @@ Spring Boot Application - Import data from Excel to MySQL Database
 
 ![Unit test - Get all inactive employee](screenshots/unitTests/unit_test_getAllInActiveEmployee.png) 
 
-> Unit test - Get all employee by field with sort ASC - getAllEmployeeByFieldWithSortASC()
+> Unit test - Get all employee by field "id" and direction ASC - getAllEmployeeByFieldIdAndDirectionASC()
 
-![Unit test - Get all employee by field with sort ASC](screenshots/unitTests/unit_test_getAllEmployeeByFieldWithSortASC.png) 
+![Unit test - Get all employee by field "id" and direction ASC](screenshots/unitTests/unit_test_getAllEmployeeByFieldIdAndDirectionASC.png) 
 
-> Unit test - Get all employee by field with sort DESC - getAllEmployeeByFieldWithSortDESC()
+> Unit test - Get all employee by field "id" and direction DESC - getAllEmployeeByFieldIdAndDirectionDESC()
 
-![Unit test - Get all employee by field with sort DESC](screenshots/unitTests/unit_test_getAllEmployeeByFieldWithSortDESC.png) 
+![Unit test - Get all employee by field "id" and direction DESC](screenshots/unitTests/unit_test_getAllEmployeeByFieldIdAndDirectionDESC.png) 
 
-> Unit test - Get all employee by department - getAllEmployeeByDepartment()
+> Unit test - Get all employee by field "name" and direction ASC - getAllEmployeeByFieldNameAndDirectionASC()
 
-![Unit test - Get all employee by department](screenshots/unitTests/unit_test_getAllEmployeeByDepartment.png) 
+![Unit test - Get all employee by field "name" and direction ASC](screenshots/unitTests/unit_test_getAllEmployeeByFieldIdAndDirectionASC.png) 
+
+> Unit test - Get all employee by field "name" and direction DESC - getAllEmployeeByFieldNameAndDirectionDESC()
+
+![Unit test - Get all employee by field "name" and direction DESC](screenshots/unitTests/unit_test_getAllEmployeeByFieldIdAndDirectionDESC.png) 
+
+> Unit test - Get all employee by department for example: IT - getAllEmployeeByDepartmentIT()
+
+![Unit test - Get all employee by department for example: IT](screenshots/unitTests/unit_test_getAllEmployeeByDepartmentIT.png) 
 
 ### Requirements
 * Java 17
