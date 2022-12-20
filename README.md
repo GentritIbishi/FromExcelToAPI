@@ -59,11 +59,11 @@ Spring Boot Application - Import data from Excel to MySQL Database
 
 > GET	/api/excel/employees?status=active	Get List of employees active in db table
 
-![Response as JSON List of active employees](screenshots/employeeEndpoint/employee_field_status_active.png) 
+![Response as JSON List of active employees](screenshots/employeeEndpoint/employee_status_active.png) 
 
 > GET	/api/excel/employees?status=inactive Get List of employees inactive in db table
 
-![Response as JSON List of inactive employees](screenshots/employeeEndpoint/employee_field_status_inactive.png) 
+![Response as JSON List of inactive employees](screenshots/employeeEndpoint/employee_status_inactive.png) 
 
 > GET	/api/excel/employees?field=id&direction=asc Get List of employees in ascending by field
 
