@@ -65,19 +65,19 @@ Spring Boot Application - Import data from Excel to MySQL Database
 
 ![Response as JSON List of inactive employees](screenshots/employeeEndpoint/employee_status_inactive.png) 
 
-> GET	/api/excel/employees?field=id&direction=asc Get List of employees in ascending by field
+> GET	/api/excel/employees?field=id&direction=asc Get List of employees in ascending by field "id"
 
 ![Response as JSON List of employees in Ascending](screenshots/employeeEndpoint/employee_field_id_direction_asc.png) 
 
-> GET	/api/excel/employees?field=id&direction=desc Get List of employees in descending by field
+> GET	/api/excel/employees?field=id&direction=desc Get List of employees in descending by field "id"
 
 ![Response as JSON List of employees in Descending](screenshots/employeeEndpoint/employee_field_id_direction_desc.png) 
 
-> GET	/api/excel/employees?field=name&direction=asc Get List of employees in ascending by field
+> GET	/api/excel/employees?field=name&direction=asc Get List of employees in ascending by field "name"
 
 ![Response as JSON List of employees in Ascending](screenshots/employeeEndpoint/employee_field_name_direction_asc.png) 
 
-> GET	/api/excel/employees?field=name&direction=desc Get List of employees in descending by field
+> GET	/api/excel/employees?field=name&direction=desc Get List of employees in descending by field "name"
 
 ![Response as JSON List of employees in Descending](screenshots/employeeEndpoint/employee_field_name_direction_desc.png) 
 
