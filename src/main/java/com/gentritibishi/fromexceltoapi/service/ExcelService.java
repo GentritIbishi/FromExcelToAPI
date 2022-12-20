@@ -38,12 +38,8 @@ public class ExcelService {
         return departmentRepository.findAll();
     }
 
-    public List<Employee> getAllEmployeeByFieldWithSortASC(String field) {
-        return employeeRepository.findAll(Sort.by(Sort.Direction.ASC, field));
-    }
-
-    public List<Employee> getAllEmployeeByFieldWithSortDESC(String field) {
-        return employeeRepository.findAll(Sort.by(Sort.Direction.DESC, field));
+    public List<Employee> getAllEmployeeByFieldAndDirection(String field, Sort.Direction direction) {
+        return employeeRepository.findAll(Sort.by(direction, field));
     }
 
     public List<Employee> getAllEmployeeByDepartment(String department) {
@@ -104,7 +100,7 @@ public class ExcelService {
                             employee.getStatus()
                     );
 
-                    if (!employeeInDb.getUsername().equals(employeeInExcel.getUsername()) ||
+                    if (!String.valueOf(employeeInDb.getUsername()).equals(String.valueOf(employeeInExcel.getUsername())) ||
                             !String.valueOf(employeeInDb.getName()).equals(String.valueOf(employeeInExcel.getName())) ||
                             !String.valueOf(employeeInDb.getManager()).equals(String.valueOf(employeeInExcel.getManager())) ||
                             !String.valueOf(employeeInDb.getEmail()).equals(String.valueOf(employeeInExcel.getEmail())) ||

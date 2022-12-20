@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -39,6 +40,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import static com.gentritibishi.fromexceltoapi.helpers.Constants.ASC;
+import static com.gentritibishi.fromexceltoapi.helpers.Constants.DESC;
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -55,31 +58,6 @@ public class ExcelControllerTest {
 
     @MockBean
     private ExcelService service;
-
-    @Value("${app.document-root}")String documentRoot;
-
-    public MultipartFile getMultipartFile(String fileName, String filePath, String contentType) {
-        Path path=Paths.get(filePath);
-        String name= fileName;
-        String originalFileName = fileName;
-        String contType = contentType;
-        byte[] content = null;
-        try {
-            content = Files.readAllBytes(path);
-        }catch (final IOException e) {}
-        MultipartFile result = new MockMultipartFile(name, originalFileName, contType, content);
-        return result;
-    }
-
-    public HttpEntity<byte[]> getFileInByteArray(String fileName, String filePath, String contentType, String parameterName) throws IOException{
-        MultipartFile file=getMultipartFile(fileName, filePath, contentType);
-        //Get byteArray of the file
-        LinkedMultiValueMap<String,String> headerMap = new LinkedMultiValueMap<>();
-        headerMap.add("Content-disposition", "form-data; name=" + parameterName + "; filename=" +file.getOriginalFilename());
-        headerMap.add("Content-type", contentType);
-        HttpEntity<byte[]> doc = new HttpEntity<byte[]>(file.getBytes(),headerMap);
-        return doc;
-    }
 
     @Test
     public void uploadFile() throws Exception {
@@ -120,7 +98,7 @@ public class ExcelControllerTest {
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$", hasSize(1)))
-                .andExpect(jsonPath("$[0].department_name", is(department.getDepartmentName())));
+                .andExpect(jsonPath("$[0].departmentName", is(department.getDepartmentName())));
     }
 
     @Test
@@ -167,9 +145,8 @@ public class ExcelControllerTest {
                 .andExpect(jsonPath("$", hasSize(1)))
                 .andExpect(jsonPath("$[0].status", is(employee.getStatus())));
     }
-
     @Test
-    public void getAllEmployeeByFieldWithSortASC() throws Exception {
+    public void getAllEmployeeByFieldIdAndDirectionASC() throws Exception {
         String field = "id";
         Employee employee = new Employee("gentrit.ibishi", "Gentrit Ibishi", "liz.erd", "gentritibishi@gmail.com"
                 , "IT", "(566) 576-7814", "L.Dardania", "2020-02-02", "2022-05-10", "inactive");
@@ -177,9 +154,9 @@ public class ExcelControllerTest {
                 , "IT", "(566) 576-7814", "L.Dardania", "2020-02-02", "2022-05-10", "active");
         List<Employee> allEmployees = Arrays.asList(employee, employee1);
 
-        given(service.getAllEmployeeByFieldWithSortASC(field)).willReturn(allEmployees);
+        given(service.getAllEmployeeByFieldAndDirection(field, Sort.Direction.ASC)).willReturn(allEmployees);
 
-        mvc.perform(MockMvcRequestBuilders.get("/api/excel/employees/"+field+"/asc"))
+        mvc.perform(MockMvcRequestBuilders.get("/api/excel/employees/sort?field="+field+"&direction="+ASC))
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$", hasSize(2)))
@@ -188,7 +165,7 @@ public class ExcelControllerTest {
     }
 
     @Test
-    public void getAllEmployeeByFieldWithSortDESC() throws Exception {
+    public void getAllEmployeeByFieldIdAndDirectionDESC() throws Exception {
         String field = "id";
         Employee employee = new Employee("gentrit.ibishi", "Gentrit Ibishi", "liz.erd", "gentritibishi@gmail.com"
                 , "IT", "(566) 576-7814", "L.Dardania", "2020-02-02", "2022-05-10", "inactive");
@@ -196,9 +173,47 @@ public class ExcelControllerTest {
                 , "IT", "(566) 576-7814", "L.Dardania", "2020-02-02", "2022-05-10", "active");
         List<Employee> allEmployees = Arrays.asList(employee, employee1);
 
-        given(service.getAllEmployeeByFieldWithSortDESC(field)).willReturn(allEmployees);
+        given(service.getAllEmployeeByFieldAndDirection(field, Sort.Direction.DESC)).willReturn(allEmployees);
 
-        mvc.perform(MockMvcRequestBuilders.get("/api/excel/employees/"+field+"/desc"))
+        mvc.perform(MockMvcRequestBuilders.get("/api/excel/employees/sort?field="+field+"&direction="+DESC))
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$", hasSize(2)))
+                .andExpect(jsonPath("$[0].id", is(employee.getId())))
+                .andExpect(jsonPath("$[1].id", is(employee1.getId())));
+    }
+
+    @Test
+    public void getAllEmployeeByFieldNameAndDirectionASC() throws Exception {
+        String field = "name";
+        Employee employee = new Employee("gentrit.ibishi", "Gentrit Ibishi", "liz.erd", "gentritibishi@gmail.com"
+                , "IT", "(566) 576-7814", "L.Dardania", "2020-02-02", "2022-05-10", "inactive");
+        Employee employee1 = new Employee("besnik.ibishi", "Besnik Ibishi", "liz.erd", "besnikibishi@gmail.com"
+                , "IT", "(566) 576-7814", "L.Dardania", "2020-02-02", "2022-05-10", "active");
+        List<Employee> allEmployees = Arrays.asList(employee, employee1);
+
+        given(service.getAllEmployeeByFieldAndDirection(field, Sort.Direction.ASC)).willReturn(allEmployees);
+
+        mvc.perform(MockMvcRequestBuilders.get("/api/excel/employees/sort?field="+field+"&direction="+ASC))
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$", hasSize(2)))
+                .andExpect(jsonPath("$[0].id", is(employee.getId())))
+                .andExpect(jsonPath("$[1].id", is(employee1.getId())));
+    }
+
+    @Test
+    public void getAllEmployeeByFieldNameAndDirectionDESC() throws Exception {
+        String field = "name";
+        Employee employee = new Employee("gentrit.ibishi", "Gentrit Ibishi", "liz.erd", "gentritibishi@gmail.com"
+                , "IT", "(566) 576-7814", "L.Dardania", "2020-02-02", "2022-05-10", "inactive");
+        Employee employee1 = new Employee("besnik.ibishi", "Besnik Ibishi", "liz.erd", "besnikibishi@gmail.com"
+                , "IT", "(566) 576-7814", "L.Dardania", "2020-02-02", "2022-05-10", "active");
+        List<Employee> allEmployees = Arrays.asList(employee, employee1);
+
+        given(service.getAllEmployeeByFieldAndDirection(field, Sort.Direction.DESC)).willReturn(allEmployees);
+
+        mvc.perform(MockMvcRequestBuilders.get("/api/excel/employees/sort?field="+field+"&direction="+DESC))
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$", hasSize(2)))

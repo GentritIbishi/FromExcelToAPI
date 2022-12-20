@@ -7,6 +7,7 @@ import com.gentritibishi.fromexceltoapi.models.Department;
 import com.gentritibishi.fromexceltoapi.models.Employee;
 import com.gentritibishi.fromexceltoapi.service.ExcelService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -15,6 +16,9 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.gentritibishi.fromexceltoapi.helpers.Constants.ASC;
+import static com.gentritibishi.fromexceltoapi.helpers.Constants.DESC;
 
 @CrossOrigin("http://localhost:8080")
 @Controller
@@ -103,31 +107,22 @@ public class ExcelController {
         }
     }
 
-    @GetMapping("/employees/{field}/asc")
-    public ResponseEntity<List<Employee>> getAllEmployeeByFieldWithSortASC(@PathVariable String field) {
+    @GetMapping("/employees/sort")
+    @ResponseBody
+    public ResponseEntity<List<Employee>> getAllEmployeeByFieldAndDirection(@RequestParam(value = "field") String field, @RequestParam(value = "direction") String direction) {
         try {
-            List<Employee> employees = fileService.getAllEmployeeByFieldWithSortASC(field);
+            List<Employee> employees = new ArrayList<>();
+            if (direction.equalsIgnoreCase(ASC)) {
+                employees = fileService.getAllEmployeeByFieldAndDirection(field, Sort.Direction.ASC);
+            } else if (direction.equalsIgnoreCase(DESC)) {
+                employees = fileService.getAllEmployeeByFieldAndDirection(field, Sort.Direction.DESC);
+            }
 
             if (employees.isEmpty()) {
                 return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            } else {
+                return new ResponseEntity<>(employees, HttpStatus.OK);
             }
-
-            return new ResponseEntity<>(employees, HttpStatus.OK);
-        } catch (Exception e) {
-            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
-
-    @GetMapping("/employees/{field}/desc")
-    public ResponseEntity<List<Employee>> getAllEmployeeByFieldWithSortDESC(@PathVariable String field) {
-        try {
-            List<Employee> employees = fileService.getAllEmployeeByFieldWithSortDESC(field);
-
-            if (employees.isEmpty()) {
-                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-            }
-
-            return new ResponseEntity<>(employees, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
@@ -140,16 +135,13 @@ public class ExcelController {
 
             List<String> lastNames = new ArrayList<>();
 
-            for(int i = 0; i<employees.size();i++)
-            {
+            for (int i = 0; i < employees.size(); i++) {
                 //for each employee get last name and list
                 String fullName = employees.get(i).getName();
                 String[] fullNameArr = fullName.split(" ");
-                if(fullNameArr.length > 2)
-                {
+                if (fullNameArr.length > 2) {
                     lastNames.add(fullNameArr[2]);
-                }else if(fullNameArr.length == 2)
-                {
+                } else if (fullNameArr.length == 2) {
                     lastNames.add(fullNameArr[1]);
                 }
             }
